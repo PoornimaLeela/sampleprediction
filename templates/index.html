@@ -1,0 +1,106 @@
+ <!DOCTYPE html>  
+ <html lang="en">  
+ <head>  
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning Techniques for Cyclosporine Dosage Prediction</title>  
+</head>  
+<style>
+input{
+padding:6px;
+font-size: 14px;
+border-radius: 4px;
+}
+label{
+width: 240px;
+display: inline-block;
+text-align:right;
+}
+.button{
+width: 240px;
+display:inline-block;
+text-align: right;
+}
+select{
+padding: 6px;
+font-size: 14px;
+
+}
+textarea {
+padding:6px;
+font-size:14px;
+}
+input[type="checkbox"],input[type="radio"]{
+height: 16px;
+width: 16px;
+}
+input[type="radio"]{
+margin-left:32px;
+}
+input[type="checkbox"]{
+margin-left:72px;
+}
+.other label{
+text-align:left;
+width:300px;
+}
+
+fieldset {
+  
+  padding:10px;
+  width:600px;
+  line-height:1.8;}
+</style>
+ <body style="background-color:powderblue;">  
+     <h2>Patient Details for Dosage Prediction</h2>  
+	 <fieldset size="250px">
+     <form action="{{ url_for('predict')}}" method="post"> 
+       
+          
+		
+        <label>Age</label> 
+        <input type="number" name="age"><br> <br> 
+         <label>Height</label>  
+         <input type="number" name="height"><br>  <br>
+         <label>Weight</label> 
+         <input type="number" name="weight"><br>
+		 <br> <label>Gender</label>  
+<select name="gender">  
+<option value = "male"> Male 
+</option>  
+<option value = "female"> Female  
+</option>  
+ 
+</select></br>
+		 
+		  
+		 <br> <label> Renal_Problem</label>  
+<select name="renal_problem">  
+<option value = "Yes">Yes 
+</option>  
+<option value = "No"> No 
+</option>  
+ 
+</select></br> 
+<br> <label> Hepatic_Problem </label>  
+<select name="hepatic_problem">  
+<option value = "Yes"> Yes   
+</option>  
+<option value = "No"> No   
+</option>  
+ 
+</select></br> <br>
+		<label>Plasma_Conc_drug</label> 
+         <input type="number" name="plasma_conc"><br> <br><br>
+           
+          
+           <div align="center">
+           
+       <input type="button"    value="clear"> &nbsp;  &nbsp;  <input type="submit"  value="Predict Dosage"> 
+   </div>
+     
+	 </form>
+  <h3 style="color:white;">{{ prediction_text }}<h3> 
+  </fieldset>  
+ </body>  
+</html>  
