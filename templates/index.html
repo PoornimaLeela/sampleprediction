@@ -1,146 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+ <!DOCTYPE html>  
+ <html lang="en">  
+ <head>  
+ <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dosage prediction for cyclosporine</title>
-</head>
+  <title>Machine Learning Techniques for Cyclosporine Dosage Prediction</title>  
+</head>  
+<style>
+input{
+padding:6px;
+font-size: 14px;
+border-radius: 4px;
+}
+label{
+width: 240px;
+display: inline-block;
+text-align:right;
+}
+.button{
+width: 240px;
+display:inline-block;
+text-align: right;
+}
+select{
+padding: 6px;
+font-size: 14px;
 
-<body>
+}
+textarea {
+padding:6px;
+font-size:14px;
+}
+input[type="checkbox"],input[type="radio"]{
+height: 16px;
+width: 16px;
+}
+input[type="radio"]{
+margin-left:32px;
+}
+input[type="checkbox"]{
+margin-left:72px;
+}
+.other label{
+text-align:left;
+width:300px;
+}
 
-    <div style="color:gray">
-        <form action="{{ url_for('predict')}}" method="post">
-            <h2 style="color:white;">Dosage Predictive analysis</h2>
-            <h3 style="color:white;">Age</h3>
-            <input id="first" name="age" type="number ">
-            <h3 style="color:white;">Weight</h3><br><input id="second" name="weight" required="required">
-            <h3 style="color:white;">Blood Concentration</h3><input id="third" name="bloodconc" required="required">
-            
-            <br><br><button id="sub" type="submit ">Prescription</button>
-            <br>
-
-
-
-
-        </form>
-
-
-
-        <br><br><h3 style="color:white;">{{ prediction_text }} mg<h3>
-    </div>
-
-
-
-
-    <style>
-        body {
-            background-color: lightslategray;
-            text-align: center;
-            padding: 0px;
-        }
-        
-        #research {
-            font-size: 18px;
-            width: 100px;
-            height: 23px;
-            top: 23px;
-        }
-        
-        #box {
-            border-radius: 60px;
-            border-color: 45px;
-            border-style: solid;
-            font-family: cursive;
-            text-align: center;
-            background-color: rgb(168, 131, 61);
-            font-size: medium;
-            position: absolute;
-            width: 700px;
-            bottom: 9%;
-            height: 850px;
-            right: 30%;
-            padding: 0px;
-            margin: 0px;
-            font-size: 14px;
-        }
-        
-        #fuel {
-            width: 83px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 20px;
-        }
-        
-        #fuel:hover {
-            background-color: coral;
-        }
-        
-        #research {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #research:hover {
-            background-color: coral;
-        }
-        
-        #resea {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #resea:hover {
-            background-color: coral;
-        }
-        
-        #sub {
-            width: 120px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #sub:hover {
-            background-color: darkcyan;
-        }
-        
-        #first {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #second {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #third {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #fourth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-    </style>
-</body>
-
-</html>
+fieldset {
+  
+  padding:10px;
+  width:600px;
+  line-height:1.8;}
+</style>
+ <body style="background-color:powderblue;">  
+     <h2>Patient Details for Dosage Prediction</h2>  
+	 <fieldset size="250px">
+     <form action="{{ url_for('predict')}}" method="post"> 
+       
+          
+		
+        <label>Age(yrs)</label> 
+        <input type="number" name="age" required="required"><br> <br> 
+         <label>Height(feet)</label>  
+         <input type="number" name="height" required="required"><br>  <br>
+         <label>Weight(kgs)</label> 
+         <input type="number" name="weight" required="required"><br>
+		 <br> <label>Gender</label>  
+<select name="gender">  
+<option value = "male"> Male 
+</option>  
+<option value = "female"> Female  
+</option>  
+ 
+</select></br>
+		 
+		  
+		 <br> <label> Renal_Problem</label>  
+<select name="renal_problem">  
+<option value = "Yes">Yes 
+</option>  
+<option value = "No"> No 
+</option>  
+ 
+</select></br> 
+<br> <label> Hepatic_Problem </label>  
+<select name="hepatic_problem">  
+<option value = "Yes"> Yes   
+</option>  
+<option value = "No"> No   
+</option>  
+ 
+</select></br> <br>
+		<label>Plasma_Conc_drug(ng/ml)</label> 
+         <input type="number" name="plasma_conc" required="required"><br> <br><br>
+           
+          
+           <div align="center">
+           
+       <input type="button"    value="clear"> &nbsp;  &nbsp;  <input type="submit"  value="Predict Dosage"> 
+   </div>
+     
+	 </form>
+  <h3 style="color:black;">{{ prediction_text }}mg<h3> 
+  </fieldset>  
+ </body>  
+</html>  
